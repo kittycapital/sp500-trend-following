@@ -250,29 +250,13 @@ body{font-family:'Noto Sans KR',sans-serif;background:var(--bg0);color:var(--t1)
 <!-- TOP 50 Section -->
 <div class="section" id="top50sec">
   <div class="section-title">🏆 TOP 50 — 트렌드 팔로잉 최적 종목 (5년 검증)</div>
-  <div class="hero-cards" id="heroCards"></div>
-  <div style="margin-top:8px;overflow-x:auto">
+  <div style="overflow-x:auto">
     <table class="t50-tbl">
       <thead><tr>
         <th>#</th><th>종목</th><th>적합도</th><th>5년 수익</th><th>초과수익</th><th class="hm2">승률</th><th class="hm2">수익/손실</th><th>현재 신호</th><th>현재 점수</th>
       </tr></thead>
       <tbody id="t50body"></tbody>
     </table>
-  </div>
-</div>
-
-<!-- Market History Chart -->
-<div class="section">
-  <div class="chart-sec">
-    <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;margin-bottom:10px">
-      <div class="section-title" style="margin:0">📈 시장 트렌드 추이</div>
-      <div class="chart-tabs" id="histTabs">
-        <div class="chart-tab active" data-ch="score">평균 점수</div>
-        <div class="chart-tab" data-ch="signals">신호 비율</div>
-        <div class="chart-tab" data-ch="sectors">섹터 로테이션</div>
-      </div>
-    </div>
-    <div class="chart-wrap"><canvas id="histChart"></canvas></div>
   </div>
 </div>
 
@@ -317,7 +301,7 @@ body{font-family:'Noto Sans KR',sans-serif;background:var(--bg0);color:var(--t1)
 
 <script>
 let D=null,H=null,cf='ALL',cs='score_d',csf=null,sq='';
-let histCI=null,eqCI=null,yrCI=null;
+let eqCI=null,yrCI=null;
 
 const SC=s=>s>=75?'var(--g)':s>=60?'var(--bl)':s>=40?'var(--y)':'var(--r)';
 const SN={'STRONG_BUY':'강한매수','BUY':'매수','HOLD':'관망','SELL':'매도'};
@@ -330,58 +314,14 @@ async function init(){
   render();
 }
 
-// ── Market History Chart ──
-function renderHist(type){
-  if(histCI){histCI.destroy();histCI=null}
-  if(!H||!H.length)return;
-  const ctx=document.getElementById('histChart').getContext('2d');
-  const lb=H.map(h=>h.date.slice(5));
-  let cfg;
-  if(type==='score'){
-    cfg={type:'line',data:{labels:lb,datasets:[
-      {label:'평균',data:H.map(h=>h.avg_score),borderColor:'#3b82f6',backgroundColor:'rgba(59,130,246,.08)',fill:true,tension:.3,pointRadius:1.5,borderWidth:2},
-      {label:'중앙값',data:H.map(h=>h.median_score),borderColor:'#a855f7',borderDash:[4,4],tension:.3,pointRadius:0,borderWidth:1.5}
-    ]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{color:'#94a3b8',font:{size:10}}}},scales:{x:{ticks:{color:'#64748b',font:{size:9}},grid:{color:'rgba(30,45,69,.4)'}},y:{min:30,max:80,ticks:{color:'#64748b'},grid:{color:'rgba(30,45,69,.4)'}}}}};
-  }else if(type==='signals'){
-    cfg={type:'bar',data:{labels:lb,datasets:[
-      {label:'강한매수',data:H.map(h=>h.strong_buy),backgroundColor:'rgba(34,197,94,.7)',stack:'s'},
-      {label:'매수',data:H.map(h=>h.buy),backgroundColor:'rgba(59,130,246,.7)',stack:'s'},
-      {label:'관망',data:H.map(h=>h.hold),backgroundColor:'rgba(234,179,8,.7)',stack:'s'},
-      {label:'매도',data:H.map(h=>h.sell),backgroundColor:'rgba(239,68,68,.7)',stack:'s'}
-    ]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{color:'#94a3b8',font:{size:9}}}},scales:{x:{stacked:true,ticks:{color:'#64748b',font:{size:9}},grid:{display:false}},y:{stacked:true,ticks:{color:'#64748b'},grid:{color:'rgba(30,45,69,.4)'}}}}};
-  }else{
-    const secs=Object.keys(H[0]?.sectors||{}).slice(0,6);
-    const cols=['#3b82f6','#22c55e','#eab308','#ef4444','#a855f7','#06b6d4'];
-    cfg={type:'line',data:{labels:lb,datasets:secs.map((s,i)=>({label:s,data:H.map(h=>(h.sectors||{})[s]||0),borderColor:cols[i%6],tension:.3,pointRadius:0,borderWidth:1.5}))},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{color:'#94a3b8',font:{size:8}}}},scales:{x:{ticks:{color:'#64748b',font:{size:9}},grid:{display:false}},y:{ticks:{color:'#64748b'},grid:{color:'rgba(30,45,69,.4)'}}}}};
-  }
-  histCI=new Chart(ctx,cfg);
-}
-
 // ── Top 50 ──
 function renderTop50(){
   const top50=D.stocks.slice().sort((a,b)=>b.strategy_fitness-a.strategy_fitness).slice(0,50);
-  // Hero cards (top 5)
-  document.getElementById('heroCards').innerHTML=top50.slice(0,5).map((s,i)=>{
-    const fc=FC(s.strategy_fitness),bt=s.backtest;
-    return `<div class="hero" onclick="showD('${s.ticker}')">
-      <div class="hero-rank">#${i+1}</div>
-      <div class="hero-tk">${s.ticker}</div>
-      <div class="hero-nm">${s.name}</div>
-      <div class="hero-fit" style="color:${fc}">${s.strategy_fitness}</div>
-      <div class="hero-stats">
-        <div class="hero-stat">5Y <span class="${bt.total_return>=0?'pos':'neg'}">${bt.total_return>=0?'+':''}${bt.total_return}%</span></div>
-        <div class="hero-stat">승률 <span>${bt.win_rate}%</span></div>
-        <div class="hero-stat">초과 <span class="${bt.excess_return>=0?'pos':'neg'}">${bt.excess_return>=0?'+':''}${bt.excess_return}%</span></div>
-      </div>
-      <div class="hero-sig sb sb-${s.signal}">${SN[s.signal]}</div>
-    </div>`}).join('');
-
-  // Table (6-50)
-  document.getElementById('t50body').innerHTML=top50.slice(5).map((s,i)=>{
+  document.getElementById('t50body').innerHTML=top50.map((s,i)=>{
     const bt=s.backtest,fc=FC(s.strategy_fitness);
     return `<tr class="t50-row" onclick="showD('${s.ticker}')">
-      <td class="m" style="color:var(--t3);font-size:10px">${i+6}</td>
-      <td><div class="tk">${s.fitness_rank<=50?'<span class="trophy">🏆</span>':''}${s.ticker}</div><div class="tn">${s.name}</div></td>
+      <td class="m" style="color:var(--gold);font-size:10px;font-weight:700">${i+1}</td>
+      <td><div class="tk">🏆 ${s.ticker}</div><div class="tn">${s.name}</div></td>
       <td><span class="m" style="font-weight:700;font-size:14px;color:${fc}">${s.strategy_fitness}</span></td>
       <td class="m" style="font-weight:600"><span class="${bt.total_return>=0?'pos':'neg'}">${bt.total_return>=0?'+':''}${bt.total_return}%</span></td>
       <td class="m" style="font-weight:600"><span class="${bt.excess_return>=0?'pos':'neg'}">${bt.excess_return>=0?'+':''}${bt.excess_return}%</span></td>
@@ -601,12 +541,9 @@ document.getElementById('sf').addEventListener('click',e=>{if(e.target.classList
 document.getElementById('ss').addEventListener('change',e=>{cs=e.target.value;renderTbl()});
 document.getElementById('ol').addEventListener('click',e=>{if(e.target===document.getElementById('ol'))closeD()});
 document.addEventListener('keydown',e=>{if(e.key==='Escape')closeD()});
-document.getElementById('histTabs').addEventListener('click',e=>{if(e.target.classList.contains('chart-tab')){
-  document.querySelectorAll('.chart-tab').forEach(t=>t.classList.remove('active'));e.target.classList.add('active');renderHist(e.target.dataset.ch)}});
-
 function render(){
   document.getElementById('ut').textContent=`업데이트: ${D.updated}`;
-  renderTop50();renderOv();renderSec();renderTbl();renderHist('score');
+  renderTop50();renderOv();renderSec();renderTbl();
 }
 init();
 </script>
