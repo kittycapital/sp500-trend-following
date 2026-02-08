@@ -3,22 +3,22 @@
     "date": "2026-02-08",
     "avg_score": 66.4,
     "median_score": 75.0,
-    "strong_buy": 255,
+    "strong_buy": 256,
     "buy": 53,
     "hold": 77,
     "sell": 115,
     "sectors": {
-      "Industrials": 77.2,
-      "Utilities": 72.5,
-      "Financials": 62.2,
-      "Information Technology": 50.5,
-      "Energy": 92.7,
-      "Materials": 84.0,
-      "Health Care": 63.2,
       "Consumer Discretionary": 64.7,
+      "Communication Services": 47.2,
+      "Information Technology": 50.5,
+      "Financials": 62.2,
+      "Health Care": 63.2,
+      "Utilities": 72.7,
+      "Industrials": 77.2,
+      "Energy": 92.7,
       "Consumer Staples": 79.4,
       "Real Estate": 53.2,
-      "Communication Services": 47.2
+      "Materials": 84.0
     }
   }
 ]
