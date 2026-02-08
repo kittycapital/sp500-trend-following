@@ -24,7 +24,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          pip install yfinance pandas numpy lxml html5lib
+          pip install yfinance pandas numpy
 
       - name: Fetch trend data
         run: python fetch_trend_data.py
