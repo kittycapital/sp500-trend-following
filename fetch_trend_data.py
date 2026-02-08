@@ -26,23 +26,12 @@ warnings.filterwarnings('ignore')
 # ──────────────────────────────────────────────────────────
 
 def get_sp500_tickers():
-    """Get S&P 500 tickers from Wikipedia."""
-    try:
-        table = pd.read_html('https://en.wikipedia.org/wiki/List_of_S%26P_500_companies')
-        df = table[0]
-        tickers = df['Symbol'].str.replace('.', '-', regex=False).tolist()
-        sectors = dict(zip(
-            df['Symbol'].str.replace('.', '-', regex=False),
-            df['GICS Sector']
-        ))
-        names = dict(zip(
-            df['Symbol'].str.replace('.', '-', regex=False),
-            df['Security']
-        ))
-        return tickers, sectors, names
-    except Exception as e:
-        print(f"Error fetching S&P 500 list: {e}")
-        return [], {}, {}
+    """Get S&P 500 tickers from hardcoded list (sp500_tickers.py)."""
+    from sp500_tickers import SP500
+    tickers = list(SP500.keys())
+    sectors = {t: info["sector"] for t, info in SP500.items()}
+    names = {t: info["name"] for t, info in SP500.items()}
+    return tickers, sectors, names
 
 # ──────────────────────────────────────────────────────────
 # 2. TECHNICAL INDICATORS
