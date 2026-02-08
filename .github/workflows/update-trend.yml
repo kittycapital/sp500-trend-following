@@ -30,10 +30,6 @@ jobs:
         run: python fetch_trend_data.py
         timeout-minutes: 30
 
-      - name: Copy data to root
-        run: |
-          cp data/trend_data.json trend_data.json
-
       - name: Commit and push
         run: |
           git config user.name "GitHub Actions Bot"
