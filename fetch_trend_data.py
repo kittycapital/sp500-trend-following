@@ -323,9 +323,10 @@ def main():
         with open(p,'w') as f: json.dump(output,f,cls=NumpyEncoder)
     update_trend_history(market_summary,sector_summary)
 
-    top5=[r for r in results[:5]]
+    top5=results[:5]
     print(f"\n✅ {len(results)} stocks processed")
     print(f"   Avg Score: {market_summary['avg_score']}")
-    print(f"   Top 5 Fitness: {', '.join(f'{r['ticker']}({r['strategy_fitness']})' for r in top5)}")
+    tickers = ', '.join(r['ticker'] + '(' + str(r['strategy_fitness']) + ')' for r in top5)
+    print(f"   Top 5 Fitness: {tickers}")
 
 if __name__=='__main__': main()
