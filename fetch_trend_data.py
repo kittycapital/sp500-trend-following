@@ -21,6 +21,19 @@ import yfinance as yf
 
 warnings.filterwarnings('ignore')
 
+class NumpyEncoder(json.JSONEncoder):
+    """Handle numpy types for JSON serialization."""
+    def default(self, obj):
+        if isinstance(obj, (np.integer,)):
+            return int(obj)
+        if isinstance(obj, (np.floating,)):
+            return float(obj)
+        if isinstance(obj, (np.bool_,)):
+            return bool(obj)
+        if isinstance(obj, np.ndarray):
+            return obj.tolist()
+        return super().default(obj)
+
 # ──────────────────────────────────────────────────────────
 # 1. FETCH S&P 500 TICKERS
 # ──────────────────────────────────────────────────────────
@@ -508,7 +521,7 @@ def main():
     print("\n[4/4] Saving data...")
     os.makedirs('data', exist_ok=True)
     with open('data/trend_data.json', 'w') as f:
-        json.dump(output, f, indent=2)
+        json.dump(output, f, indent=2, cls=NumpyEncoder)
 
     print(f"\n✅ Done! Saved {len(results)} stocks to data/trend_data.json")
     print(f"   Market Average Score: {market_summary['avg_score']}")
