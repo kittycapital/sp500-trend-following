@@ -28,7 +28,7 @@ jobs:
 
       - name: Fetch trend data
         run: python fetch_trend_data.py
-        timeout-minutes: 30
+        timeout-minutes: 45
 
       - name: Commit and push
         run: |
