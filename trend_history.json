@@ -42,5 +42,27 @@
       "Materials": 85.4,
       "Real Estate": 57.3
     }
+  },
+  {
+    "date": "2026-02-10",
+    "avg_score": 67.2,
+    "median_score": 75.0,
+    "strong_buy": 264,
+    "buy": 55,
+    "hold": 64,
+    "sell": 118,
+    "sectors": {
+      "Consumer Discretionary": 64.5,
+      "Communication Services": 50.4,
+      "Financials": 57.8,
+      "Information Technology": 52.4,
+      "Health Care": 60.6,
+      "Industrials": 78.5,
+      "Utilities": 78.5,
+      "Energy": 91.6,
+      "Consumer Staples": 79.7,
+      "Materials": 88.1,
+      "Real Estate": 63.5
+    }
   }
 ]
