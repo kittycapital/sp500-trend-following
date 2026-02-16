@@ -16,8 +16,8 @@ body{background:#000;color:#e4e4e7;font-family:'Noto Sans KR',sans-serif;min-hei
 .m{font-family:'JetBrains Mono',monospace}
 
 /* Nav */
-.top-nav{position:sticky;top:0;z-index:100;background:rgba(0,0,0,0.85);backdrop-filter:blur(12px);border-bottom:1px solid #1a1a1a;padding:0 16px;display:flex;align-items:center;justify-content:space-between;height:56px}
-.nav-title{font-family:'Plus Jakarta Sans',sans-serif;font-size:1.2rem;font-weight:700;color:#e4e4e7;white-space:nowrap}
+.top-nav{position:sticky;top:0;z-index:100;background:rgba(0,0,0,0.85);backdrop-filter:blur(12px);border-bottom:1px solid #1a1a1a;padding:0 16px;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;height:56px}
+.nav-title{font-family:'Plus Jakarta Sans',sans-serif;font-size:1.2rem;font-weight:700;color:#e4e4e7;white-space:nowrap;text-align:center}
 .nav-links{display:flex;gap:4px}
 .nav-link{padding:6px 14px;border-radius:6px;font-size:12px;font-weight:600;color:#a1a1aa;text-decoration:none;border:1px solid transparent;transition:all .2s;font-family:'Noto Sans KR',sans-serif}
 .nav-link:hover{color:#e4e4e7;border-color:#333}
@@ -142,12 +142,12 @@ body{background:#000;color:#e4e4e7;font-family:'Noto Sans KR',sans-serif;min-hei
 <body>
 
 <nav class="top-nav">
-  <div class="nav-title">S&P 500 트렌드 팔로잉</div>
   <div class="nav-links">
     <a class="nav-link active" href="#">TOP 50</a>
     <a class="nav-link" href="trend_all.html">전체 종목</a>
   </div>
-  <div class="nav-upd"><span class="dot"></span><span id="ut">로딩중...</span></div>
+  <div class="nav-title">S&P 500 트렌드 팔로잉</div>
+  <div class="nav-upd" style="justify-self:end"><span class="dot"></span><span id="ut">로딩중...</span></div>
 </nav>
 
 <div class="container">
@@ -395,17 +395,18 @@ document.getElementById('t50tbl').querySelector('thead').addEventListener('click
 });
 
 /* Share Functions */
-const PAGE_URL=encodeURIComponent(window.location.href);
+const SHARE_URL='https://herdvibe.com/60';
+const PAGE_URL=encodeURIComponent(SHARE_URL);
 const PAGE_TITLE=encodeURIComponent('S&P 500 트렌드 팔로잉 TOP 50 - Herdvibe');
 function shareTwitter(){window.open(`https://twitter.com/intent/tweet?text=${PAGE_TITLE}&url=${PAGE_URL}`,'_blank','width=550,height=420')}
 function shareKakao(){
   if(typeof Kakao!=='undefined'&&!Kakao.isInitialized())try{Kakao.init('a43ed7b39fac35458f4f9df925a279b5')}catch{}
-  if(typeof Kakao!=='undefined'&&Kakao.isInitialized()){Kakao.Share.sendDefault({objectType:'feed',content:{title:'S&P 500 트렌드 팔로잉 TOP 50',description:'5년 백테스트 기반 전략 적합도 랭킹',imageUrl:'',link:{mobileWebUrl:window.location.href,webUrl:window.location.href}}})}
+  if(typeof Kakao!=='undefined'&&Kakao.isInitialized()){Kakao.Share.sendDefault({objectType:'feed',content:{title:'S&P 500 트렌드 팔로잉 TOP 50',description:'5년 백테스트 기반 전략 적합도 랭킹',imageUrl:'',link:{mobileWebUrl:SHARE_URL,webUrl:SHARE_URL}}})}
   else{copyLink(document.querySelector('.share-btn.kakao'))}
 }
 function shareTelegram(){window.open(`https://t.me/share/url?url=${PAGE_URL}&text=${PAGE_TITLE}`,'_blank','width=550,height=420')}
-function shareInstagram(btn){navigator.clipboard.writeText(window.location.href).then(()=>{btn.classList.add('copied');btn.innerHTML=btn.querySelector('svg').outerHTML+'링크 복사됨!';showToast('인스타그램 스토리에 링크를 붙여넣기 하세요');setTimeout(()=>{btn.classList.remove('copied');btn.innerHTML=btn.querySelector('svg').outerHTML+'인스타그램'},2000)})}
-function copyLink(btn){navigator.clipboard.writeText(window.location.href).then(()=>{btn.classList.add('copied');const svg=btn.querySelector('svg').outerHTML;btn.innerHTML=svg+'복사됨!';showToast('링크가 복사되었습니다');setTimeout(()=>{btn.classList.remove('copied');btn.innerHTML=svg+'링크복사'},2000)})}
+function shareInstagram(btn){const svg=btn.querySelector('svg').outerHTML;navigator.clipboard.writeText(SHARE_URL).then(()=>{btn.classList.add('copied');btn.innerHTML=svg+'링크 복사됨!';showToast('인스타그램 스토리에 링크를 붙여넣기 하세요');setTimeout(()=>{btn.classList.remove('copied');btn.innerHTML=svg+'인스타그램'},2000)})}
+function copyLink(btn){const svg=btn.querySelector('svg').outerHTML;navigator.clipboard.writeText(SHARE_URL).then(()=>{btn.classList.add('copied');btn.innerHTML=svg+'복사됨!';showToast('링크가 복사되었습니다');setTimeout(()=>{btn.classList.remove('copied');btn.innerHTML=svg+'링크복사'},2000)})}
 function showToast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2500)}
 
 init();
