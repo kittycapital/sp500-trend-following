@@ -198,12 +198,12 @@ body{font-family:'Noto Sans KR',sans-serif;background:var(--bg0);color:var(--t1)
   <div class="acc-body"><div class="acc-content">
     <div class="strat-grid">
       <div class="strat-card">
-        <h3>🎯 핵심 원리</h3>
+        <h3>핵심 원리</h3>
         <p>"추세가 시작되면 올라타고, 끝나면 내린다." 저가매수가 아닌 <strong>이미 상승 중인 강한 종목에 편승</strong>하는 전략입니다.</p>
         <p style="margin-top:6px">100% 적중은 불가능하지만 <strong>큰 수익 몇 번이 작은 손실 여러 번을 커버</strong>합니다. 손실은 짧게, 수익은 길게.</p>
       </div>
       <div class="strat-card">
-        <h3>📊 복합 트렌드 점수 (0~100)</h3>
+        <h3>복합 트렌드 점수 (0~100)</h3>
         <table class="sc-tbl"><thead><tr><th>조건</th><th>배점</th><th>의미</th></tr></thead><tbody>
           <tr><td>가격 &gt; 200일 이평선</td><td>+15</td><td>장기 상승</td></tr>
           <tr><td>가격 &gt; 50일 이평선</td><td>+10</td><td>중기 상승</td></tr>
@@ -231,7 +231,7 @@ body{font-family:'Noto Sans KR',sans-serif;background:var(--bg0);color:var(--t1)
         </ul>
       </div>
       <div class="strat-card">
-        <h3>🏆 전략 적합도 점수</h3>
+        <h3>전략 적합도 점수</h3>
         <p>5년 백테스트 기반으로 이 전략과 <strong>궁합이 좋은 종목</strong>을 선별합니다.</p>
         <table class="sc-tbl"><thead><tr><th>지표</th><th>비중</th></tr></thead><tbody>
           <tr><td>초과수익 (전략 - 단순보유)</td><td>30%</td></tr>
@@ -241,7 +241,7 @@ body{font-family:'Noto Sans KR',sans-serif;background:var(--bg0);color:var(--t1)
           <tr><td>최대 낙폭 (역수)</td><td>10%</td></tr>
         </tbody></table>
         <div class="disc">
-          <p>⚠️ 교육/참고 목적이며 투자 권유가 아닙니다. 과거 수익이 미래를 보장하지 않습니다. 슬리피지·수수료 미반영.</p>
+          <p>교육/참고 목적이며 투자 권유가 아닙니다. 과거 수익이 미래를 보장하지 않습니다. 슬리피지·수수료 미반영.</p>
         </div>
       </div>
     </div>
@@ -251,7 +251,8 @@ body{font-family:'Noto Sans KR',sans-serif;background:var(--bg0);color:var(--t1)
 
 <!-- TOP 50 Section -->
 <div class="section" id="top50sec">
-  <div class="section-title">🏆 TOP 50 — 트렌드 팔로잉 최적 종목 (5년 검증)</div>
+  <div class="section-title" style="justify-content:center;text-align:center;display:block;font-size:16px">TOP 50 — 트렌드 팔로잉 최적 종목 (5년 검증)</div>
+  <div style="text-align:center;font-size:12px;color:#00e5cc;margin:-6px 0 14px;font-family:'Noto Sans KR',sans-serif">종목을 클릭하면 차트와 과거 전략 성적을 확인할 수 있습니다</div>
   <div style="overflow-x:auto">
     <table class="t50-tbl" id="t50tbl">
       <thead><tr>
@@ -278,9 +279,9 @@ body{font-family:'Noto Sans KR',sans-serif;background:var(--bg0);color:var(--t1)
 
 <!-- Controls + Full Table -->
 <div class="section">
-  <div class="section-title">🔍 전체 종목 (트렌드 점수 순)</div>
+  <div class="section-title">전체 종목 (트렌드 점수 순)</div>
   <div class="ctrl">
-    <input type="text" class="search" id="si" placeholder="🔍 종목 검색...">
+    <input type="text" class="search" id="si" placeholder="종목 검색...">
     <div class="fg" id="sf">
       <button class="fb on" data-f="ALL">전체</button>
       <button class="fb" data-f="STRONG_BUY">강한매수</button>
@@ -360,7 +361,7 @@ function renderTop50(){
     const bt=s.backtest,fc=FC(s.strategy_fitness);
     return `<tr class="t50-row" onclick="showD('${s.ticker}')">
       <td class="m" style="color:var(--gold);font-size:10px;font-weight:700">${s.fitness_rank}</td>
-      <td><div class="tk">🏆 ${s.ticker}</div><div class="tn">${s.name}</div></td>
+      <td><div class="tk">${s.ticker}</div><div class="tn">${s.name}</div></td>
       <td><span class="m" style="font-weight:700;font-size:14px;color:${fc}">${s.strategy_fitness}</span></td>
       <td class="m" style="font-weight:600"><span class="${bt.total_return>=0?'pos':'neg'}">${bt.total_return>=0?'+':''}${bt.total_return}%</span></td>
       <td class="m" style="font-weight:600"><span class="${bt.excess_return>=0?'pos':'neg'}">${bt.excess_return>=0?'+':''}${bt.excess_return}%</span></td>
@@ -411,7 +412,7 @@ function renderTbl(){
     const sc=SC(s.trend_score),bt=s.backtest,cc=s.change_pct>=0?'pos':'neg';
     const sch=s.score_change?`<span class="m" style="font-size:9px;padding:1px 3px;border-radius:3px;background:${s.score_change>0?'var(--gd)':'var(--rd)'};color:${s.score_change>0?'var(--g)':'var(--r)'}">${s.score_change>0?'+':''}${s.score_change}</span>`:'';
     return `<tr class="row" onclick="showD('${s.ticker}')">
-      <td class="m" style="color:var(--t3);font-size:10px">${s.fitness_rank<=50?'<span class="trophy">🏆</span>':''}${i+1}</td>
+      <td class="m" style="color:var(--t3);font-size:10px">${s.fitness_rank<=50?'':''}${i+1}</td>
       <td><div class="tk">${s.ticker}</div><div class="tn">${s.name}</div></td>
       <td><div class="m" style="font-weight:600;font-size:12px">$${FN(s.price)}</div><div class="m ${cc}" style="font-size:10px">${s.change_pct>=0?'+':''}${s.change_pct}%</div></td>
       <td><span class="m" style="font-weight:700;font-size:14px;color:${sc}">${s.trend_score}</span><span class="sc-bar"><span class="sc-fill" style="width:${s.trend_score}%;background:${sc}"></span></span> ${sch}</td>
@@ -439,7 +440,7 @@ function showD(tk){
       <div style="text-align:right"><div style="font-size:9px;color:var(--t3)">적합도</div><div class="big" style="color:${fc}">${s.strategy_fitness}</div></div>
       <div style="text-align:right"><div style="font-size:9px;color:var(--t3)">점수</div><div class="big" style="color:${sc}">${s.trend_score}</div></div>
     </div>
-    <span class="sb sb-${s.signal}" style="margin-top:4px;display:inline-block">${SN[s.signal]}${s.fitness_rank<=50?' 🏆 TOP '+s.fitness_rank:''}</span>
+    <span class="sb sb-${s.signal}" style="margin-top:4px;display:inline-block">${SN[s.signal]}${s.fitness_rank<=50?' TOP '+s.fitness_rank:''}</span>
   </div></div>`;
 
   // TradingView Chart
@@ -452,7 +453,7 @@ function showD(tk){
   html+=`</div>`;
 
   // Backtest stats
-  html+=`<div class="bt-sec"><h4>📊 5년 백테스트 · ${bt.total_trades}회 거래</h4>
+  html+=`<div class="bt-sec"><h4>5년 백테스트 · ${bt.total_trades}회 거래</h4>
     <div class="bt-g">
       <div class="bt-s"><div class="bv" style="color:${bt.win_rate>=50?'var(--g)':'var(--r)'}">${bt.win_rate}%</div><div class="blab">승률</div></div>
       <div class="bt-s"><div class="bv">${bt.total_trades}</div><div class="blab">총 거래</div></div>
@@ -472,7 +473,7 @@ function showD(tk){
     <div class="dc"><h4>🔧 기술적 지표</h4>
       <div class="dr"><span class="dl">SMA 50 / 200</span><span class="dv">$${FN(ind.sma_50)} / $${FN(ind.sma_200)}</span></div>
       <div class="dr"><span class="dl">RSI (14)</span><span class="dv" style="color:${ind.rsi>70?'var(--r)':ind.rsi<30?'var(--g)':'var(--t1)'}">${ind.rsi}</span></div>
-      <div class="dr"><span class="dl">ADX</span><span class="dv" style="color:${ind.adx>25?'var(--g)':'var(--t3)'}">${ind.adx}${ind.adx>40?' 🔥':ind.adx>25?' ✓':''}</span></div>
+      <div class="dr"><span class="dl">ADX</span><span class="dv" style="color:${ind.adx>25?'var(--g)':'var(--t3)'}">${ind.adx}${ind.adx>40?' ':ind.adx>25?'':''}</span></div>
       <div class="dr"><span class="dl">Supertrend</span><span class="dv" style="color:${ind.supertrend_dir==='UP'?'var(--g)':'var(--r)'}">${ind.supertrend_dir==='UP'?'▲ 상승':'▼ 하락'}</span></div>
       <div class="dr"><span class="dl">ATR</span><span class="dv">$${FN(ind.atr)}</span></div>
       <div class="dr"><span class="dl">MACD</span><span class="dv">${ind.macd} / ${ind.macd_signal}</span></div>
@@ -482,13 +483,13 @@ function showD(tk){
       <div class="dr"><span class="dl">수익률</span><span class="dv ${pt.gain_since_signal>=0?'pos':'neg'}">${pt.gain_since_signal>=0?'+':''}${pt.gain_since_signal}% (${pt.days_in_trend}일)</span></div>
       <div class="dr"><span class="dl">ATR 스톱</span><span class="dv">$${FN(pt.atr_trailing_stop)}</span></div>
       <div style="margin-top:5px;display:flex;gap:3px;flex-wrap:wrap">
-        <span class="pz ${pt.reached_10?'pz-y':'pz-n'}">+10% ${pt.reached_10?'✓':''}</span>
-        <span class="pz ${pt.reached_20?'pz-y':'pz-n'}">+20% ${pt.reached_20?'✓':''}</span>
-        <span class="pz ${pt.reached_30?'pz-y':'pz-n'}">+30% ${pt.reached_30?'✓':''}</span>
+        <span class="pz ${pt.reached_10?'pz-y':'pz-n'}">+10% ${pt.reached_10?'O':''}</span>
+        <span class="pz ${pt.reached_20?'pz-y':'pz-n'}">+20% ${pt.reached_20?'O':''}</span>
+        <span class="pz ${pt.reached_30?'pz-y':'pz-n'}">+30% ${pt.reached_30?'O':''}</span>
       </div>
       <div style="margin-top:6px;padding:6px;background:var(--bg3);border-radius:5px;font-size:10px">
-        <div class="dr"><span class="dl">EMA-10 이탈</span><span class="dv" style="color:${pt.ema10_exit_warning?'var(--r)':'var(--g)'}">${pt.ema10_exit_warning?'⚠ 경고':'✓ 안전'}</span></div>
-        <div class="dr"><span class="dl">점수 하락</span><span class="dv" style="color:${pt.score_drop_warning?'var(--r)':'var(--g)'}">${pt.score_drop_warning?'⚠ 경고':'✓ 안전'}</span></div>
+        <div class="dr"><span class="dl">EMA-10 이탈</span><span class="dv" style="color:${pt.ema10_exit_warning?'var(--r)':'var(--g)'}">${pt.ema10_exit_warning?'경고':'안전'}</span></div>
+        <div class="dr"><span class="dl">점수 하락</span><span class="dv" style="color:${pt.score_drop_warning?'var(--r)':'var(--g)'}">${pt.score_drop_warning?'경고':'안전'}</span></div>
       </div>
     </div>
   </div>`;
