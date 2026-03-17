@@ -168,7 +168,7 @@ body{background:#000;color:#e4e4e7;font-family:'Noto Sans KR',sans-serif;min-hei
 <div class="sec-grid" id="secGrid"></div>
 
 <!-- TOP 50 Table -->
-<div class="section-title">🏆 TOP 50 — 트렌드 팔로잉 최적 종목</div>
+<div class="section-title">TOP 50 — 트렌드 팔로잉 최적 종목</div>
 <div class="t50-wrap">
   <table class="t50-tbl" id="t50tbl">
     <thead><tr>
@@ -259,7 +259,7 @@ function renderTop50(){
     const bt=s.backtest,fc=FC(s.strategy_fitness);
     return `<tr class="t50-row" onclick="showD('${s.ticker}')">
       <td class="m" style="color:#f59e0b;font-size:11px;font-weight:700">${s.fitness_rank}</td>
-      <td><div class="tk">🏆 ${s.ticker}</div><div class="tn">${s.name}</div></td>
+      <td><div class="tk">${s.ticker}</div><div class="tn">${s.name}</div></td>
       <td><span class="m" style="font-weight:700;font-size:15px;color:${fc}">${s.strategy_fitness}</span></td>
       <td class="m" style="font-weight:600"><span class="${bt.total_return>=0?'pos':'neg'}">${bt.total_return>=0?'+':''}${bt.total_return}%</span></td>
       <td class="m" style="font-weight:600"><span class="${bt.excess_return>=0?'pos':'neg'}">${bt.excess_return>=0?'+':''}${bt.excess_return}%</span></td>
@@ -285,16 +285,16 @@ function showD(tk){
       <div style="text-align:right"><div style="font-size:9px;color:#71717a">적합도</div><div class="big" style="color:${fc}">${s.strategy_fitness}</div></div>
       <div style="text-align:right"><div style="font-size:9px;color:#71717a">점수</div><div class="big" style="color:${sc}">${s.trend_score}</div></div>
     </div>
-    <span class="sb sb-${s.signal}" style="margin-top:4px;display:inline-block">${SN[s.signal]}${s.fitness_rank<=50?' 🏆 TOP '+s.fitness_rank:''}</span>
+    <span class="sb sb-${s.signal}" style="margin-top:4px;display:inline-block">${SN[s.signal]}${s.fitness_rank<=50?' TOP '+s.fitness_rank:''}</span>
   </div></div>`;
 
   html+=`<div class="dp-tv"><div id="tv-widget" style="height:350px"></div></div>`;
   html+=`<div class="dp-charts">`;
-  if(hasEC) html+=`<div class="dp-chart"><h4>💹 5년 수익곡선 (전략 vs 단순보유)</h4><div class="dp-chart-wrap"><canvas id="eqCanvas"></canvas></div></div>`;
-  if(hasYR) html+=`<div class="dp-chart"><h4>📅 연도별 수익률 비교</h4><div class="dp-chart-wrap"><canvas id="yrCanvas"></canvas></div></div>`;
+  if(hasEC) html+=`<div class="dp-chart"><h4> 5년 수익곡선 (전략 vs 단순보유)</h4><div class="dp-chart-wrap"><canvas id="eqCanvas"></canvas></div></div>`;
+  if(hasYR) html+=`<div class="dp-chart"><h4> 연도별 수익률 비교</h4><div class="dp-chart-wrap"><canvas id="yrCanvas"></canvas></div></div>`;
   html+=`</div>`;
 
-  html+=`<div class="bt-sec"><h4>📊 5년 백테스트 · ${bt.total_trades}회 거래</h4>
+  html+=`<div class="bt-sec"><h4>5년 백테스트 · ${bt.total_trades}회 거래</h4>
     <div class="bt-g">
       <div class="bt-s"><div class="bv" style="color:${bt.win_rate>=50?'#22c55e':'#ef4444'}">${bt.win_rate}%</div><div class="blab">승률</div></div>
       <div class="bt-s"><div class="bv">${bt.total_trades}</div><div class="blab">총 거래</div></div>
@@ -309,15 +309,15 @@ function showD(tk){
     </div></div>`;
 
   html+=`<div class="dp-grid" style="margin-top:10px">
-    <div class="dc"><h4>🔧 기술적 지표</h4>
+    <div class="dc"><h4> 기술적 지표</h4>
       <div class="dr"><span class="dl">SMA 50 / 200</span><span class="dv">$${FN(ind.sma_50)} / $${FN(ind.sma_200)}</span></div>
       <div class="dr"><span class="dl">RSI (14)</span><span class="dv" style="color:${ind.rsi>70?'#ef4444':ind.rsi<30?'#22c55e':'#e4e4e7'}">${ind.rsi}</span></div>
-      <div class="dr"><span class="dl">ADX</span><span class="dv" style="color:${ind.adx>25?'#22c55e':'#71717a'}">${ind.adx}${ind.adx>40?' 🔥':ind.adx>25?' ✓':''}</span></div>
+      <div class="dr"><span class="dl">ADX</span><span class="dv" style="color:${ind.adx>25?'#22c55e':'#71717a'}">${ind.adx}${ind.adx>40?' ●':ind.adx>25?' ✓':''}</span></div>
       <div class="dr"><span class="dl">Supertrend</span><span class="dv" style="color:${ind.supertrend_dir==='UP'?'#22c55e':'#ef4444'}">${ind.supertrend_dir==='UP'?'▲ 상승':'▼ 하락'}</span></div>
       <div class="dr"><span class="dl">ATR</span><span class="dv">$${FN(ind.atr)}</span></div>
       <div class="dr"><span class="dl">MACD</span><span class="dv">${ind.macd} / ${ind.macd_signal}</span></div>
     </div>
-    <div class="dc"><h4>💰 익절 신호</h4>
+    <div class="dc"><h4>익절 신호</h4>
       <div class="dr"><span class="dl">진입가 (${pt.entry_date})</span><span class="dv">$${FN(pt.entry_price)}</span></div>
       <div class="dr"><span class="dl">수익률</span><span class="dv ${pt.gain_since_signal>=0?'pos':'neg'}">${pt.gain_since_signal>=0?'+':''}${pt.gain_since_signal}% (${pt.days_in_trend}일)</span></div>
       <div class="dr"><span class="dl">ATR 스톱</span><span class="dv">$${FN(pt.atr_trailing_stop)}</span></div>
