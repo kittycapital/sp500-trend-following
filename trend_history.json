@@ -1164,5 +1164,27 @@
       "Consumer Staples": 45.0,
       "Utilities": 55.5
     }
+  },
+  {
+    "date": "2026-04-21",
+    "avg_score": 61.2,
+    "median_score": 65.0,
+    "strong_buy": 180,
+    "buy": 98,
+    "hold": 113,
+    "sell": 111,
+    "sectors": {
+      "Consumer Discretionary": 65.4,
+      "Communication Services": 65.0,
+      "Information Technology": 69.1,
+      "Health Care": 51.1,
+      "Financials": 70.7,
+      "Industrials": 62.1,
+      "Energy": 50.0,
+      "Utilities": 47.1,
+      "Consumer Staples": 41.0,
+      "Materials": 61.5,
+      "Real Estate": 74.0
+    }
   }
 ]
