@@ -3213,24 +3213,24 @@
   },
   {
     "date": "2026-09-01",
-    "avg_score": 53.6,
+    "avg_score": 52.5,
     "median_score": 50.0,
-    "strong_buy": 137,
-    "buy": 80,
-    "hold": 128,
-    "sell": 151,
+    "strong_buy": 134,
+    "buy": 66,
+    "hold": 140,
+    "sell": 156,
     "sectors": {
-      "Health Care": 65.9,
-      "Consumer Discretionary": 38.8,
-      "Information Technology": 59.3,
-      "Financials": 60.0,
-      "Communication Services": 62.0,
-      "Industrials": 49.1,
-      "Materials": 55.4,
-      "Energy": 75.5,
-      "Consumer Staples": 50.3,
-      "Real Estate": 41.4,
-      "Utilities": 29.0
+      "Health Care": 67.3,
+      "Consumer Discretionary": 37.1,
+      "Information Technology": 56.8,
+      "Financials": 58.3,
+      "Communication Services": 60.2,
+      "Industrials": 44.9,
+      "Materials": 52.3,
+      "Energy": 79.0,
+      "Consumer Staples": 53.2,
+      "Real Estate": 41.9,
+      "Utilities": 30.3
     }
   }
 ]
