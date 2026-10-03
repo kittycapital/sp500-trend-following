@@ -3650,5 +3650,27 @@
       "Energy": 42.6,
       "Consumer Staples": 28.3
     }
+  },
+  {
+    "date": "2026-10-03",
+    "avg_score": 41.2,
+    "median_score": 35.0,
+    "strong_buy": 70,
+    "buy": 35,
+    "hold": 114,
+    "sell": 277,
+    "sectors": {
+      "Health Care": 51.4,
+      "Consumer Discretionary": 33.9,
+      "Information Technology": 64.4,
+      "Financials": 37.9,
+      "Materials": 30.8,
+      "Communication Services": 34.5,
+      "Real Estate": 32.9,
+      "Industrials": 41.8,
+      "Utilities": 26.1,
+      "Energy": 44.0,
+      "Consumer Staples": 25.1
+    }
   }
 ]
