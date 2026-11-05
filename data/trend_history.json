@@ -4156,5 +4156,27 @@
       "Utilities": 72.9,
       "Energy": 66.7
     }
+  },
+  {
+    "date": "2026-11-05",
+    "avg_score": 67.1,
+    "median_score": 70.0,
+    "strong_buy": 241,
+    "buy": 87,
+    "hold": 71,
+    "sell": 95,
+    "sectors": {
+      "Health Care": 78.0,
+      "Information Technology": 52.7,
+      "Financials": 75.3,
+      "Industrials": 64.8,
+      "Materials": 71.9,
+      "Communication Services": 45.8,
+      "Real Estate": 61.2,
+      "Consumer Discretionary": 66.8,
+      "Consumer Staples": 76.4,
+      "Utilities": 74.0,
+      "Energy": 61.9
+    }
   }
 ]
